@@ -40,6 +40,7 @@
     XCTAssertTrue([@"wmgjpnull cyjqlejgi lyhhdzbui wctlsqsbm fxeoxmsvv ovxjeirfm zadysxbhn nxkkbffpn bawobphfy" isEqualToString:[self.encrypt encryption:@"wclwfoznbmyycxvaxagjhtexdkwjqhlojykopldsxesbbnezqmixfpujbssrbfhlgubvfhpfliimvmnny"]]);
 }
 
+
 - (void)testNumber8 {
     XCTAssertTrue([@"hae and via ecy" isEqualToString:[self.encrypt encryption:@"haveaniceday"]]);
 }

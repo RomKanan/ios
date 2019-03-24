@@ -1,5 +1,5 @@
 #import "AppDelegate.h"
-
+#import "Diagonal.h"
 @interface AppDelegate ()
 
 @end
@@ -8,10 +8,13 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    [self.window setRootViewController: [UIViewController new]];
+    self.window = [[[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]] autorelease];
+    [self.window setRootViewController: [[[UIViewController alloc] init] autorelease]];
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
+
+
+
     return YES;
 }
 
@@ -20,4 +23,13 @@
 - (void)applicationWillEnterForeground:(UIApplication *)application {}
 - (void)applicationDidBecomeActive:(UIApplication *)application {}
 - (void)applicationWillTerminate:(UIApplication *)application {}
+
+- (void)dealloc
+{
+    if(_window) {
+        [self.window release];
+    }
+
+    [super dealloc];
+}
 @end

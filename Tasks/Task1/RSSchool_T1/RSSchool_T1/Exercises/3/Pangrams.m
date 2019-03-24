@@ -4,7 +4,17 @@
 
 // Complete the pangrams function below.
 - (BOOL)pangrams:(NSString *)string {
-    return NO;
+    
+    NSString* alphabet = @"abcdefghijklmnopqrstuvwxyz";
+    
+    for (NSInteger i = 0; i < [alphabet length]; i++ ) {
+        NSString* letter = [NSString stringWithFormat:@"%c", [alphabet characterAtIndex:i]];
+        if (![[string lowercaseString] containsString:letter ]) {
+            return NO;
+        }
+    }
+    
+    return YES;
 }
 
 @end
