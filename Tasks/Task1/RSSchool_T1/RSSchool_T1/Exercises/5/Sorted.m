@@ -32,12 +32,6 @@ BOOL isArraySorted(NSArray* arr){
         }
     }
     
-    if (result) {
-        NSLog(@"Sorted");
-    } else {
-        NSLog(@"Not Sorted");
-    }
-    
     return result;
 }
 
@@ -83,18 +77,24 @@ NSArray* reversedArray(NSArray* arr) {
         }
         
         if (pointOfBreak == 0) {
-            siutable = 1;
-            siutableValue = arr[siutable];
+            for (NSInteger i = 0; i < [arr count]; i++) {
+                
+                if ([arr[i] integerValue] < [breakValue integerValue]) {
+                    
+                    siutable = i;
+                    siutableValue = arr[siutable];
+                    break;
+                }
+            }
         } else {
         
-            for (NSInteger i = pointOfBreak; i < [arr count] - 1; i++) {
+            for (NSInteger i = pointOfBreak; i < [arr count]; i++) {
 
                 if (([arr[i] integerValue] > [arr[pointOfBreak - 1] integerValue]) &&
                     ([arr[i] integerValue] < [arr[pointOfBreak + 1] integerValue]) ) {
                 
                     siutable = i;
                     siutableValue = arr[siutable];
-                    NSLog(@"%ld - %@", siutable, siutableValue);
                     break;
                 }
             }
