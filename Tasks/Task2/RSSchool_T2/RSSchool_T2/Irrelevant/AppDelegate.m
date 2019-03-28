@@ -6,11 +6,17 @@
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-  self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-  [self.window setRootViewController: [UIViewController new]];
+  self.window = [[[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]] autorelease];
+  [self.window setRootViewController: [[[UIViewController alloc]init]autorelease]];
   self.window.backgroundColor = [UIColor whiteColor];
   [self.window makeKeyAndVisible];
   return YES;
+}
+
+- (void)dealloc
+{
+    [_window release];
+    [super dealloc];
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {}
