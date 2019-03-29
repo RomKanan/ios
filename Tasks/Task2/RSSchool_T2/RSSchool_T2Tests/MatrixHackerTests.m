@@ -8,7 +8,26 @@
 
 @interface Char : NSObject <Character>
 @end
+
 @implementation Char
+
+- (NSString *)name
+{
+    return @"Just for Test";
+}
+
+- (BOOL)isClone
+{
+    return NO;
+}
+
++ (instancetype)createWithName:(NSString *)name isClone:(BOOL)clone
+{
+    Char * person = [[Char alloc] init];
+    return person;
+}
+
+
 @end
 
 @implementation MatrixHackerTests

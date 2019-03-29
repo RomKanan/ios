@@ -28,11 +28,7 @@
 }
 
 - (void)test5 {
-<<<<<<< HEAD
-  XCTAssertEqual(@"MCXCMIV", [self.translator romanFromArabic:@"1994"]);
-=======
   XCTAssertTrue([@"MCMXCIV" isEqualToString:[self.translator romanFromArabic:@"1994"]]);
->>>>>>> d7efedc81646013adc88082e23d26b26471d9ffd
 }
 
 - (void)test6 {
