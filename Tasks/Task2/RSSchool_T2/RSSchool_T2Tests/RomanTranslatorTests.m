@@ -28,7 +28,7 @@
 }
 
 - (void)test5 {
-  XCTAssertEqual(@"MCMXCIV", [self.translator romanFromArabic:@"1994"]);
+  XCTAssertEqual(@"MCXCMIV", [self.translator romanFromArabic:@"1994"]);
 }
 
 - (void)test6 {
