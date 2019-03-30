@@ -29,6 +29,7 @@
 @property (nonatomic, readonly) NSInteger minutes;
 @property (nonatomic, readonly) NSInteger seconds;
 @end
+
 @interface DoomsdayMachine : NSObject
 /**
  Returns AssimilationInfo for a gived date string

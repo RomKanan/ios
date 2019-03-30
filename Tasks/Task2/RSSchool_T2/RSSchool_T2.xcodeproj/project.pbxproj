@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A055EE7D224ED05F0079FB94 /* RKAssimilationInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = A055EE7C224ED05F0079FB94 /* RKAssimilationInfo.m */; };
 		E38F8D97224A3CDE009EF306 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = E38F8D96224A3CDE009EF306 /* AppDelegate.m */; };
 		E38F8D9A224A3CDE009EF306 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E38F8D99224A3CDE009EF306 /* ViewController.m */; };
 		E38F8D9F224A3CE0009EF306 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E38F8D9E224A3CE0009EF306 /* Assets.xcassets */; };
@@ -39,6 +40,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		A055EE7B224ED05F0079FB94 /* RKAssimilationInfo.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RKAssimilationInfo.h; sourceTree = "<group>"; };
+		A055EE7C224ED05F0079FB94 /* RKAssimilationInfo.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RKAssimilationInfo.m; sourceTree = "<group>"; };
 		E38F8D92224A3CDE009EF306 /* RSSchool_T2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RSSchool_T2.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E38F8D95224A3CDE009EF306 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		E38F8D96224A3CDE009EF306 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -167,6 +170,8 @@
 			children = (
 				E38F8DD0224A8AEA009EF306 /* DoomsdayMachine.h */,
 				E38F8DD1224A8AEA009EF306 /* DoomsdayMachine.m */,
+				A055EE7B224ED05F0079FB94 /* RKAssimilationInfo.h */,
+				A055EE7C224ED05F0079FB94 /* RKAssimilationInfo.m */,
 			);
 			path = 3;
 			sourceTree = "<group>";
@@ -289,6 +294,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E38F8D9A224A3CDE009EF306 /* ViewController.m in Sources */,
+				A055EE7D224ED05F0079FB94 /* RKAssimilationInfo.m in Sources */,
 				E38F8DD2224A8AEA009EF306 /* DoomsdayMachine.m in Sources */,
 				E38F8DDA224BA508009EF306 /* MatrixHacker.m in Sources */,
 				E38F8DE1224D0B8F009EF306 /* TinyURL.m in Sources */,

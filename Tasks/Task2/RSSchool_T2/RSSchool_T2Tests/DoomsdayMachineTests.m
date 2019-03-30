@@ -19,8 +19,11 @@
 }
 
 - (void)test1 {
-  XCTAssertEqual(@"Sunday, August 14, 2208", [self.machine doomsdayString]);
+    //XCTAssertEqual(@"Sunday, August 14, 2208", [self.machine doomsdayString]);
+    XCTAssertTrue([@"Sunday, August 14, 2208" isEqualToString:[self.machine doomsdayString]]);
 }
+
+
 
 - (void)test2 {
   id<AssimilationInfo> assimilationInfo = [self.machine assimilationInfoForCurrentDateString:@"2019:03:26@00\\00/12"];
@@ -45,3 +48,5 @@
 }
 
 @end
+
+
