@@ -25,25 +25,20 @@
 + (instancetype)assimilationInfoFromString:(NSString*)dateString
 {
     RKAssimilationInfo* info = [[RKAssimilationInfo alloc] init];
-    
-    
     NSDateFormatter* borgFormater = [[NSDateFormatter alloc] init];
     NSDateFormatter* humanFormater = [[NSDateFormatter alloc] init];
-    
     NSString* assimilation =@"14 August 2208 03:13:37";
-    
     
     borgFormater.dateFormat = @"yyyy:MM:dd@ss\\mm/HH";
     humanFormater.dateFormat = @"dd MMMM yyyy HH:mm:ss";
     
-    
     NSDate* assimilationDate = [humanFormater dateFromString:assimilation];
     NSDate* date = [borgFormater dateFromString:dateString];
     
+    [borgFormater release];
+    [humanFormater release];
+    
     NSCalendar* calendar = [NSCalendar currentCalendar];
-    
-    
-    
     NSDateComponents* components = [calendar components:(kCFCalendarUnitYear |
                                                          kCFCalendarUnitMonth |
                                                          kCFCalendarUnitDay |
@@ -61,12 +56,7 @@
     info.minutes = components.minute;
     info.seconds = components.second;
 
-    
-    
-    
     return [info autorelease];
 }
-
-
 
 @end
