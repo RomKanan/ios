@@ -19,7 +19,6 @@
   NSString *output = @"[[0,1,2],null,[\"123\",\"456\",\"789\"],[[[1337],unsupported]]]";
   XCTAssertTrue([output isEqualToString:[array print]]);
 }
-
 - (void)test2 {
   NSArray *array = @[@[@[@[@[@[@[@[@[@[]]]]]]]]]];
   XCTAssertTrue([@"[[[[[[[[[[]]]]]]]]]]" isEqualToString:[array print]]);

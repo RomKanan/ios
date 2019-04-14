@@ -468,7 +468,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 42K4QGQ7K4;
+				DEVELOPMENT_TEAM = HJSF27K7R5;
 				INFOPLIST_FILE = RSSchool_T3/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -485,7 +485,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 42K4QGQ7K4;
+				DEVELOPMENT_TEAM = HJSF27K7R5;
 				INFOPLIST_FILE = RSSchool_T3/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
