@@ -1,6 +1,7 @@
 #import "FullBinaryTrees.h"
 #import "ArrayPrint.h"
 
+
 @implementation FullBinaryTrees : NSObject
 
 - (NSString *)stringForNodeCount:(NSInteger)count
@@ -28,23 +29,25 @@
     
     NSArray* arrayOfCombinations = [NSArray arrayWithObject:start];
     
-    for (NSInteger i = 0; i < (count - 3); i++) {
+    for (NSInteger i = 0; i < (count - 3); i++)
+    {
         NSMutableArray* tempOO = [NSMutableArray array];
         NSMutableArray* tempNullNull = [NSMutableArray array];
         NSMutableArray* tempAnswers = [NSMutableArray array];
         
-        for (NSMutableArray* element in arrayOfCombinations) {
+        for (NSMutableArray* element in arrayOfCombinations)
+        {
             NSMutableArray* tempElement = [[element mutableCopy] autorelease];
             [tempElement addObject:OO];
             [tempOO addObject:tempElement];
         }
-        
-        for (NSMutableArray* element in arrayOfCombinations) {
+        for (NSMutableArray* element in arrayOfCombinations)
+        {
             NSMutableArray* tempElement = [[element mutableCopy] autorelease];
             [tempElement addObject:nullnull];
             [tempNullNull addObject:tempElement];
-            
         }
+        
         [tempAnswers addObjectsFromArray:tempOO];
         [tempAnswers addObjectsFromArray:tempNullNull];
         arrayOfCombinations = [[tempAnswers copy] autorelease];
@@ -80,15 +83,8 @@
     return debug;
 }
 
-- (NSString*) lastObjectOfArray:(NSMutableArray*)array moveToIndex:(NSUInteger)index
-{
-    NSArray* lastObject = [array lastObject];
-    [array insertObject:lastObject atIndex:index];
-    [array removeLastObject];
-    return [array trickyPrint];
-}
 
-- (BOOL) canBeTree:(NSString*)string
+- (BOOL)canBeTree:(NSString*)string
 {
     NSArray* testingElements = [string componentsSeparatedByString:@","];
     

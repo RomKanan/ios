@@ -13,7 +13,11 @@
  when there was no text entered by the user.
 
  "Step" text field should allow only numbers, it is the step by which the date value should be increased or decreased.
- "Date unit" should only allow these values: year, month, week, day, hour, minute. If is the "what" should be added/subtracted to/from the date by "Step" values.
+ 
+ "Date unit" should only allow these values:
+ year, month, week, day, hour, minute.
+ 
+ If is the "what" should be added/subtracted to/from the date by "Step" values.
  By default, the counting should start from the current date, unless another date is specified in
  the "Start date" text field. If so, the modified start date should be written to the label.
  The label should be used for the output.
@@ -35,4 +39,6 @@
  09/04/2019 00:00
 */
 @interface DateMachine : UIViewController
+
+
 @end

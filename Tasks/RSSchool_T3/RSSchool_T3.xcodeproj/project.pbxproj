@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A0CCA7D52263A578009482D6 /* NSDate+DateMath.m in Sources */ = {isa = PBXBuildFile; fileRef = A0CCA7D42263A578009482D6 /* NSDate+DateMath.m */; };
 		E3821557225B533B00E3B12B /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = E3821556225B533B00E3B12B /* AppDelegate.m */; };
 		E382155F225B533E00E3B12B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E382155E225B533E00E3B12B /* Assets.xcassets */; };
 		E3821562225B533E00E3B12B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E3821560225B533E00E3B12B /* LaunchScreen.storyboard */; };
@@ -38,6 +39,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		A0CCA7D32263A578009482D6 /* NSDate+DateMath.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSDate+DateMath.h"; sourceTree = "<group>"; };
+		A0CCA7D42263A578009482D6 /* NSDate+DateMath.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSDate+DateMath.m"; sourceTree = "<group>"; };
 		E3821552225B533B00E3B12B /* RSSchool_T3.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RSSchool_T3.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E3821555225B533B00E3B12B /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		E3821556225B533B00E3B12B /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -165,6 +168,8 @@
 			children = (
 				E39C2575225CAA7E00C3BCC1 /* DateMachine.h */,
 				E39C2576225CAA7E00C3BCC1 /* DateMachine.m */,
+				A0CCA7D32263A578009482D6 /* NSDate+DateMath.h */,
+				A0CCA7D42263A578009482D6 /* NSDate+DateMath.m */,
 			);
 			path = 3;
 			sourceTree = "<group>";
@@ -299,6 +304,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A0CCA7D52263A578009482D6 /* NSDate+DateMath.m in Sources */,
 				E39C256C225B898A00C3BCC1 /* ArrayPrint.m in Sources */,
 				E3821565225B533E00E3B12B /* main.m in Sources */,
 				E39C2577225CAA7E00C3BCC1 /* DateMachine.m in Sources */,

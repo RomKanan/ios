@@ -23,5 +23,4 @@
  */
 @interface FullBinaryTrees : NSObject
 - (NSString *)stringForNodeCount:(NSInteger)count;
-- (NSString*) lastObjectOfArray:(NSMutableArray*)array moveToIndex:(NSUInteger)index;
 @end
