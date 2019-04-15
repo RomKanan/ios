@@ -1,7 +1,7 @@
 #import "DateMachine.h"
 #import "NSDate+DateMath.h"
 
-@interface DateMachine ()
+@interface DateMachine () <UITextFieldDelegate>
 @property (retain,nonatomic) NSDateFormatter* dateFormater;
 @property (retain,nonatomic) UILabel* outputDateLabel;
 @property (retain,nonatomic) UITextField* startDateTextField;
@@ -9,9 +9,6 @@
 @property (retain,nonatomic) UITextField* dateUnitTextField;
 @property (retain,nonatomic) UIButton* addButton;
 @property (retain,nonatomic) UIButton* subButton;
-
-
-
 
 @end
 
@@ -49,6 +46,7 @@
     self.startDateTextField.placeholder = @"Start date";
     self.startDateTextField.autocorrectionType = UITextAutocorrectionTypeNo;
     self.stepTextField.autocapitalizationType = UITextAutocapitalizationTypeNone;
+    self.startDateTextField.delegate = self;
 
     [self.view addSubview:self.startDateTextField];
     
@@ -65,6 +63,7 @@
     self.stepTextField.placeholder = @"Step";
     self.stepTextField.autocorrectionType = UITextAutocorrectionTypeNo;
     self.stepTextField.autocapitalizationType = UITextAutocapitalizationTypeNone;
+    self.stepTextField.delegate = self;
     
     [self.view addSubview:self.stepTextField];
     
@@ -81,7 +80,8 @@
     self.dateUnitTextField.placeholder = @"Date unit";
     self.dateUnitTextField.autocorrectionType = UITextAutocorrectionTypeNo;
     self.dateUnitTextField.autocapitalizationType = UITextAutocapitalizationTypeNone;
-
+    self.dateUnitTextField.delegate = self;
+    
     [self.view addSubview:self.dateUnitTextField];
     
     UIButton* addButton = [UIButton buttonWithType:UIButtonTypeSystem];
@@ -115,7 +115,6 @@
     self.subButton.layer.cornerRadius = 12.f;
     [self.subButton addTarget:self action:@selector(subPushed:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:self.subButton];
-    
 }
 
 -(void)addPushed:(id)sender
@@ -141,6 +140,7 @@
     }
     
     self.startDateTextField.text = @"";
+    
     return NO;
 }
 
@@ -153,6 +153,7 @@
         return YES;
     }
     self.stepTextField.text = @"";
+    
     return NO;
 }
 
@@ -171,15 +172,18 @@
     }
 
     self.dateUnitTextField.text = @"";
+    
     return NO;
 }
 
 -(void)addingUnit:(BOOL)adding{
     if ([self startDateTextIsValid] && [self stepTextIsValid] && [self unitTextIsValid]) {
-        NSDate* startingDate = [[[NSDate alloc] init] autorelease];
+        NSDate* startingDate = nil;
+        
         if (![self.startDateTextField.text isEqualToString:@""]) {
             startingDate = [self.dateFormater dateFromString:self.startDateTextField.text];
-        } else
+        }
+        else
         {
             startingDate = [self.dateFormater dateFromString:self.outputDateLabel.text];
         }
@@ -194,36 +198,95 @@
         if ([unit isEqualToString:@"year"])
         {
             startingDate = [startingDate rk_dateByAddingYears:amount];
+            self.startDateTextField.text = @"";
+
         }
         else if ([unit isEqualToString:@"month"])
         {
             startingDate = [startingDate rk_dateByAddingMonths:amount];
+            self.startDateTextField.text = @"";
 
         }
         else if ([unit isEqualToString:@"week"])
         {
             startingDate = [startingDate rk_dateByAddingWeek:amount];
+            self.startDateTextField.text = @"";
 
         }
         else if ([unit isEqualToString:@"day"])
         {
             startingDate = [startingDate rk_dateByAddingDays:amount];
+            self.startDateTextField.text = @"";
 
         }
         else if ([unit isEqualToString:@"hour"])
         {
             startingDate = [startingDate rk_dateByAddingHours:amount];
+            self.startDateTextField.text = @"";
 
         }
         else if ([unit isEqualToString:@"minute"])
         {
             startingDate = [startingDate rk_dateByAddingMinutes:amount];
+            self.startDateTextField.text = @"";
         }
         
         self.outputDateLabel.text = [self.dateFormater stringFromDate:startingDate];
         NSLog(@"");
         
     }
+}
+
+-(BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
+{
+    NSLog(@"shouldChangeCharactersInRange");
+    if(textField == self.startDateTextField)
+    {
+        NSMutableString* contentOfTextField = [NSMutableString stringWithString:self.startDateTextField.text];
+        [contentOfTextField replaceCharactersInRange:range withString:string];
+        if ([self.dateFormater dateFromString:contentOfTextField])
+        {
+            self.outputDateLabel.text = contentOfTextField;
+        }
+        
+        return YES;
+    }
+    
+    if(textField == self.stepTextField)
+    {
+        NSCharacterSet* stepTextSet = [NSCharacterSet characterSetWithCharactersInString:string];
+        
+        if ([[NSCharacterSet decimalDigitCharacterSet] isSupersetOfSet:stepTextSet])
+        {
+            return YES;
+        }
+        else
+        {
+            return NO;
+        }
+    }
+    
+    if(textField == self.dateUnitTextField)
+    {
+        if (![[NSCharacterSet lowercaseLetterCharacterSet] isSupersetOfSet:[NSCharacterSet characterSetWithCharactersInString:string]])
+        {
+            return NO;
+        }
+    }
+    
+    return YES;
+}
+
+- (void)dealloc
+{
+    [_dateFormater release];
+    [_outputDateLabel release];
+    [_startDateTextField release];
+    [_stepTextField release];
+    [_dateUnitTextField release];
+    [_addButton release];
+    [_subButton release];
+    [super dealloc];
 }
 
 @end

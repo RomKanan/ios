@@ -42,12 +42,12 @@
 
 -(NSDate*)dateByAddingUnit:(NSCalendarUnit)unit amount:(NSInteger)amount
 {
-    NSDateComponents * components = [[NSDateComponents alloc] init];
+    NSDateComponents * components = [[[NSDateComponents alloc] init] autorelease];
     [components setValue:amount forComponent:unit];
     
     return [[NSCalendar currentCalendar] dateByAddingComponents:components
                                                          toDate:self
-                                                        options:nil];
+                                                        options:0];
 }
 
 @end

@@ -49,15 +49,9 @@
         return result;
 }
 
-
-
-
-
-
 #pragma mark -auxiliaryForSecondTask
 - (NSString *)trickyPrint
 {
-    
     NSMutableString* result = [NSMutableString stringWithFormat:@""];
     for (NSUInteger i = 0; i < self.count; i++)
     {

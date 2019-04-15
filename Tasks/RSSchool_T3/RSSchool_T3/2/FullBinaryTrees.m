@@ -55,7 +55,6 @@
 
     for (NSMutableArray* combianation in arrayOfCombinations)
     {
-        
         NSCountedSet* set = [NSCountedSet setWithArray:combianation];
         
         NSUInteger countOfOO = [set countForObject:OO];
@@ -78,9 +77,8 @@
         }
     }
     
-
-    NSString* debug =  [arrayOfAnswers print];
-    return debug;
+    NSString* retValue =  [arrayOfAnswers print];
+    return retValue;
 }
 
 
