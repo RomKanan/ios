@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A0CEC5D22269D45100EF88E3 /* RKViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A0CEC5D12269D45100EF88E3 /* RKViewController.m */; };
+		A0CEC5D6226A1DF700EF88E3 /* NSString+RKOnlyDigits.m in Sources */ = {isa = PBXBuildFile; fileRef = A0CEC5D5226A1DF700EF88E3 /* NSString+RKOnlyDigits.m */; };
 		BD47B5532268ED9F0060BDF3 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = BD47B5522268ED9F0060BDF3 /* AppDelegate.m */; };
 		BD47B5552268EDA10060BDF3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BD47B5542268EDA10060BDF3 /* Assets.xcassets */; };
 		BD47B5582268EDA10060BDF3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BD47B5562268EDA10060BDF3 /* LaunchScreen.storyboard */; };
@@ -15,6 +17,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		A0CEC5D02269D45100EF88E3 /* RKViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RKViewController.h; sourceTree = "<group>"; };
+		A0CEC5D12269D45100EF88E3 /* RKViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RKViewController.m; sourceTree = "<group>"; };
+		A0CEC5D4226A1DF700EF88E3 /* NSString+RKOnlyDigits.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSString+RKOnlyDigits.h"; sourceTree = "<group>"; };
+		A0CEC5D5226A1DF700EF88E3 /* NSString+RKOnlyDigits.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSString+RKOnlyDigits.m"; sourceTree = "<group>"; };
 		BD47B54E2268ED9F0060BDF3 /* RSSchool_T4.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RSSchool_T4.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BD47B5512268ED9F0060BDF3 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		BD47B5522268ED9F0060BDF3 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -62,6 +68,10 @@
 				BD47B5562268EDA10060BDF3 /* LaunchScreen.storyboard */,
 				BD47B5592268EDA10060BDF3 /* Info.plist */,
 				BD47B55A2268EDA10060BDF3 /* main.m */,
+				A0CEC5D02269D45100EF88E3 /* RKViewController.h */,
+				A0CEC5D12269D45100EF88E3 /* RKViewController.m */,
+				A0CEC5D4226A1DF700EF88E3 /* NSString+RKOnlyDigits.h */,
+				A0CEC5D5226A1DF700EF88E3 /* NSString+RKOnlyDigits.m */,
 			);
 			path = RSSchool_T4;
 			sourceTree = "<group>";
@@ -136,8 +146,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A0CEC5D6226A1DF700EF88E3 /* NSString+RKOnlyDigits.m in Sources */,
 				BD47B55B2268EDA10060BDF3 /* main.m in Sources */,
 				BD47B5532268ED9F0060BDF3 /* AppDelegate.m in Sources */,
+				A0CEC5D22269D45100EF88E3 /* RKViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
