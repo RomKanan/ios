@@ -9,13 +9,10 @@
 #import "NSString+RKOnlyDigits.h"
 
 @implementation NSString (RKOnlyDigits)
-- (NSMutableString*)rk_cleared{
+- (NSString*)rk_cleared{
     NSArray* array = [self componentsSeparatedByCharactersInSet:[NSCharacterSet decimalDigitCharacterSet].invertedSet];
-    NSMutableString* answer = [NSMutableString string];
-    for (NSString* string in array) {
-        [answer appendString:string];
-    }
-    return [[answer copy] autorelease];
+    NSString* answer = [array componentsJoinedByString:@""];
+    return answer;
 }
 
 @end

@@ -30,7 +30,6 @@
     self.rootView.layer.cornerRadius = 15.f;
     [self.view addSubview:self.rootView];
     
-    
     UIImageView* flag = [[UIImageView alloc] initWithFrame:CGRectMake(self.rootView.bounds.origin.x + 4,
                                                                       self.rootView.bounds.origin.y + 4,
                                                                       self.rootView.bounds.size.width / 5.f,
@@ -38,7 +37,6 @@
     self.flagView = flag;
     [flag release];
     
-    self.flagView.layer.borderWidth = 0.5;
     self.flagView.layer.borderColor = [UIColor lightGrayColor].CGColor;
     self.flagView.layer.cornerRadius = 15.f;
     [self.rootView addSubview:self.flagView];
@@ -92,27 +90,28 @@
         return NO;
     }
     
-    
-    if((range.location == 0) && ![string isEqualToString:@"+"] && ![string hasPrefix:@"+"] && (string.length != 0) )
+
+    NSString* replacement = [textField.text substringWithRange:range];
+    if (([string isEqualToString:@""]) && (([replacement isEqualToString:@" "])
+        || ([replacement isEqualToString:@"-"]) || ([replacement isEqualToString:@"+"])))
     {
-        textField.text = @"+";
-        range.location += 1;
+        return YES;
     }
     
     NSMutableString* contextOfField = [NSMutableString stringWithString:textField.text];
     [contextOfField replaceCharactersInRange:range withString:string];
     NSString* onlyDigits = [contextOfField rk_cleared];
     
+    if((range.location == 0) && ![string isEqualToString:@"+"] && ![string hasPrefix:@"+"] && (string.length != 0) )
+    {
+        textField.text = [NSString stringWithFormat:@"+%@", contextOfField];
+        range.location += 1;
+    }
+    
     if (onlyDigits.length > 12)
     {
-        textField.text = [NSString stringWithFormat:@"+%@", onlyDigits];
-        self.flagView.image = nil;
-        self.tempLabel.text = @"ERROR";
-        self.tempLabel.textColor = [UIColor redColor];
-        [self.rootView bringSubviewToFront:self.tempLabel];
         return NO;
     }
-  
     NSString* letteCode = [self countryCode:onlyDigits];
     
     if (letteCode)
@@ -122,134 +121,163 @@
     }
     else
     {
+        self.phoneTextField.text = [NSString stringWithFormat:@"+%@", onlyDigits];
         self.flagView.image = nil;
         self.tempLabel.text = @"Number:";
         self.tempLabel.textColor = [UIColor blackColor];
         [self.rootView bringSubviewToFront:self.tempLabel];
+        return NO;
     }
     
     NSArray* tenDigitsCounrty = [NSArray arrayWithObjects:@"KZ", @"RU", nil];
     NSArray* eightDigitsCountry = [NSArray arrayWithObjects:@"MD", @"AM", @"TM", nil];
     
-    NSString* removingString = [textField.text substringWithRange:range];
-    BOOL delitingFormat = YES;
-    if ([removingString isEqualToString:@")"] || [removingString isEqualToString:@"("] ||
-        [removingString isEqualToString:@" "] || [removingString isEqualToString:@"-"] )
-    {
-        delitingFormat = NO;
-    }
-    
-     // Код для стран с 10ти значными номерами
-    if (letteCode && delitingFormat)
+
+    if (letteCode)
     {
         if ([tenDigitsCounrty containsObject:letteCode])
         {
-            if (onlyDigits.length > 1 && onlyDigits.length < 5 && string.length != 0)
+            if (onlyDigits.length > 11)
             {
-                NSMutableString * returnString = [onlyDigits mutableCopy];
-                [returnString insertString:@" (" atIndex:1];
-                [returnString appendString:@") "];
-                textField.text = [NSString stringWithFormat:@"+%@", returnString];
-                [returnString release];
-                return NO;
-            }
-            if (onlyDigits.length > 7 && onlyDigits.length < 10)
-            {
-                NSMutableString * returnString = [onlyDigits mutableCopy];
-                [returnString insertString:@" (" atIndex:1];
-                [returnString insertString:@") " atIndex:6];
-                [returnString insertString:@" " atIndex:11];
-                textField.text = [NSString stringWithFormat:@"+%@", returnString];
-                [returnString release];
-                return NO;
-            }
-            if (onlyDigits.length > 9 && onlyDigits.length < 12)
-            {
-                NSMutableString * returnString = [onlyDigits mutableCopy];
-                [returnString insertString:@" (" atIndex:1];
-                [returnString insertString:@") " atIndex:6];
-                [returnString insertString:@" " atIndex:11];
-                [returnString insertString:@" " atIndex:14];
-                textField.text = [NSString stringWithFormat:@"+%@", returnString];
-                [returnString release];
-                return NO;
-            }
-            if (onlyDigits.length > 11) {
                 textField.text = [NSString stringWithFormat:@"+%@", onlyDigits];
                 self.flagView.image = nil;
                 self.tempLabel.text = @"Unknown";
                 self.tempLabel.textColor = [UIColor redColor];
                 [self.rootView bringSubviewToFront:self.tempLabel];
+                return NO;
+            }
+            else
+            {
+                NSMutableString* format = [NSMutableString stringWithString:@"+X (XXX) XXX XX XX"];
+                NSMutableString* returnString = [NSMutableString string];
+                for (NSUInteger i = 0; i < onlyDigits.length; i++)
+                {
+                    NSRange replacmentRange = [format rangeOfString:@"X"];
+                    [format replaceCharactersInRange:replacmentRange withString:[onlyDigits substringWithRange:NSMakeRange(i, 1)]];
+                    returnString = [NSMutableString stringWithString:[format substringToIndex:replacmentRange.location + 1]];
+                    [self placeCursorToIndex:replacmentRange.location];
+                }
+                
+                NSInteger cursorPosition = range.location + 1;
+                if ((string.length != 0) && textField.text.length - 1 <= range.location)
+                {
+                    cursorPosition = returnString.length;
+                }
+                if (range.length > 0)
+                {
+                    cursorPosition = range.location;
+                }
+                
+                if([returnString containsString:@"("] && ![returnString containsString:@")"] )
+                {
+                    [returnString appendString:@")"];
+                    cursorPosition = returnString.length - 1;
+                }
+                self.phoneTextField.text = returnString;
+                
+                if (cursorPosition > returnString.length)
+                {
+                    cursorPosition = returnString.length;
+                }
+                [self placeCursorToIndex:cursorPosition];
                 return NO;
             }
         }
-        // Код для стран с 8ми значными номерами
         else if ([eightDigitsCountry containsObject:letteCode])
         {
-            if (onlyDigits.length > 3 && onlyDigits.length < 6 && string.length != 0)
+            if (onlyDigits.length > 11)
             {
-                NSMutableString * returnString = [onlyDigits mutableCopy];
-                [returnString insertString:@" (" atIndex:3];
-                [returnString appendString:@") "];
-                textField.text = [NSString stringWithFormat:@"+%@", returnString];
-                [returnString release];
-                return NO;
-            }
-            if (onlyDigits.length > 7 && onlyDigits.length < 12)
-            {
-                NSMutableString * returnString = [onlyDigits mutableCopy];
-                [returnString insertString:@" (" atIndex:3];
-                [returnString insertString:@") " atIndex:7];
-                [returnString insertString:@"-" atIndex:12];
-                textField.text = [NSString stringWithFormat:@"+%@", returnString];
-                [returnString release];
-                return NO;
-            }
-            
-            if (onlyDigits.length > 11) {
                 textField.text = [NSString stringWithFormat:@"+%@", onlyDigits];
                 self.flagView.image = nil;
                 self.tempLabel.text = @"Unknown";
                 self.tempLabel.textColor = [UIColor redColor];
                 [self.rootView bringSubviewToFront:self.tempLabel];
+                return NO;
+            }
+            else
+            {
+                NSMutableString* format = [NSMutableString stringWithString:@"+XXX (XX) XXX-XXX"];
+                NSMutableString* returnString = [NSMutableString string];
+                for (NSUInteger i = 0; i < onlyDigits.length; i++)
+                {
+                    NSRange replacmentRange = [format rangeOfString:@"X"];
+                    [format replaceCharactersInRange:replacmentRange withString:[onlyDigits substringWithRange:NSMakeRange(i, 1)]];
+                    returnString = [NSMutableString stringWithString:[format substringToIndex:replacmentRange.location + 1]];
+                    [self placeCursorToIndex:replacmentRange.location];
+                }
+                
+                NSInteger cursorPosition = range.location + 1;
+                if ((string.length != 0) && textField.text.length - 1 <= range.location)
+                {
+                    cursorPosition = returnString.length;
+                }
+                if (range.length > 0)
+                {
+                    cursorPosition = range.location;
+                }
+                
+                if([returnString containsString:@"("] && ![returnString containsString:@")"] )
+                {
+                    [returnString appendString:@")"];
+                    cursorPosition = returnString.length - 1;
+                }
+                
+                self.phoneTextField.text = returnString;
+                
+                if (cursorPosition > returnString.length)
+                {
+                    cursorPosition = returnString.length;
+                }
+                
+                [self placeCursorToIndex:cursorPosition];
                 return NO;
             }
         }
         else
         {
-            // Код для стран с 9ти значными номерами
-
-            if (onlyDigits.length > 3 && onlyDigits.length < 6 && string.length != 0)
+            NSMutableString* format = [NSMutableString stringWithString:@"+XXX (XX) XXX-XX-XX"];
+            NSMutableString* returnString = [NSMutableString string];
+            for (NSUInteger i = 0; i < onlyDigits.length; i++)
             {
-                NSMutableString * returnString = [onlyDigits mutableCopy];
-                [returnString insertString:@" (" atIndex:3];
-                [returnString appendString:@") "];
-                textField.text = [NSString stringWithFormat:@"+%@", returnString];
-                [returnString release];
-                return NO;
+                NSRange replacmentRange = [format rangeOfString:@"X"];
+                [format replaceCharactersInRange:replacmentRange withString:[onlyDigits substringWithRange:NSMakeRange(i, 1)]];
+                returnString = [NSMutableString stringWithString:[format substringToIndex:replacmentRange.location + 1]];
+                [self placeCursorToIndex:replacmentRange.location];
             }
-            if (onlyDigits.length > 7 && onlyDigits.length < 10)
+            
+            NSInteger cursorPosition = range.location + 1;
+            if ((string.length != 0) && textField.text.length - 1 <= range.location)
             {
-                NSMutableString * returnString = [onlyDigits mutableCopy];
-                [returnString insertString:@" (" atIndex:3];
-                [returnString insertString:@") " atIndex:7];
-                [returnString insertString:@"-" atIndex:12];
-                textField.text = [NSString stringWithFormat:@"+%@", returnString];
-                [returnString release];
-                return NO;
+                cursorPosition = returnString.length;
             }
-            if (onlyDigits.length > 9 && onlyDigits.length < 13)
+            if (range.length > 0)
             {
-                NSMutableString * returnString = [onlyDigits mutableCopy];
-                [returnString insertString:@" (" atIndex:3];
-                [returnString insertString:@") " atIndex:7];
-                [returnString insertString:@"-" atIndex:12];
-                [returnString insertString:@"-" atIndex:15];
-                textField.text = [NSString stringWithFormat:@"+%@", returnString];
-                [returnString release];
-                return NO;
+                cursorPosition = range.location;
             }
-       }
+            
+            if([returnString containsString:@"("] && ![returnString containsString:@")"] )
+            {
+                [returnString appendString:@")"];
+                cursorPosition = returnString.length - 1;
+            }
+            self.phoneTextField.text = returnString;
+            
+            if (cursorPosition > returnString.length)
+            {
+                cursorPosition = returnString.length;
+            }
+            [self placeCursorToIndex:cursorPosition];
+            return NO;
+        }
+    }
+    else
+    {
+        textField.text = [NSString stringWithFormat:@"+%@", onlyDigits];
+        self.flagView.image = nil;
+        self.tempLabel.text = @"Unknown";
+        self.tempLabel.textColor = [UIColor redColor];
+        [self.rootView bringSubviewToFront:self.tempLabel];
+        return NO;
     }
 
     return YES;
@@ -313,5 +341,11 @@
     [super dealloc];
 }
 
-
+- (void)placeCursorToIndex:(NSInteger)index
+{
+    UITextField* input = self.phoneTextField;
+    UITextPosition *point = [input positionFromPosition:[input beginningOfDocument]
+                                                 offset:index];
+    [self.phoneTextField setSelectedTextRange:[input textRangeFromPosition:point toPosition:point]];
+}
 @end
